@@ -1,0 +1,27 @@
+{
+  "app": {
+    "name": "Check-in Museum Thailand",
+    "tagline": "Collect a stamp from every museum you visit"
+  },
+  "nav": {
+    "home": "Home",
+    "museums": "Museums",
+    "passport": "Passport",
+    "language": "Language"
+  },
+  "home": {
+    "title": "Welcome to your Museum Passport",
+    "subtitle": "Scan the QR at each museum to collect stamps and build your passport",
+    "browseMuseums": "Browse Museums",
+    "viewPassport": "View My Passport"
+  },
+  "language": {
+    "th": "ไทย",
+    "en": "English"
+  },
+  "supabase": {
+    "status": "Connection status",
+    "connected": "Connected",
+    "disconnected": "Not connected"
+  }
+}
