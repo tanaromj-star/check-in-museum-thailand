@@ -7,6 +7,8 @@ import { hasLocale } from "next-intl";
 import { SerwistProvider } from "@serwist/next/react";
 import { routing } from "@/i18n/routing";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { BottomNav } from "@/components/bottom-nav";
+import { Link } from "@/i18n/navigation";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -69,12 +71,16 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <SerwistProvider swUrl="/serwist/sw.js">
             <header className="flex items-center justify-between px-4 py-3 border-b border-zinc-200 dark:border-zinc-800">
-              <span className="font-semibold text-sm">
+              <Link
+                href="/"
+                className="font-semibold text-sm hover:opacity-80 transition-opacity"
+              >
                 {messages.app?.name ?? "Check-in Museum Thailand"}
-              </span>
+              </Link>
               <LanguageSwitcher />
             </header>
-            {children}
+            <div className="flex-1 flex flex-col">{children}</div>
+            <BottomNav />
           </SerwistProvider>
         </NextIntlClientProvider>
       </body>
