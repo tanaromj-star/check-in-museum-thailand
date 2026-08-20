@@ -34,6 +34,14 @@ export default async function Home({
           {t("home.viewPassport")}
         </Link>
       </div>
+      <div className="mt-4">
+        <Link
+          href={{ pathname: "/analyze" }}
+          className="inline-flex h-10 items-center justify-center rounded-full text-sm font-medium text-zinc-600 dark:text-zinc-400 underline-offset-4 hover:underline"
+        >
+          {t("home.analyzePhoto")}
+        </Link>
+      </div>
       <div className="mt-10">
         <SupabaseHealthCheck />
       </div>

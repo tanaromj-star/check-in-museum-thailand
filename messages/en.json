@@ -7,13 +7,29 @@
     "home": "Home",
     "museums": "Museums",
     "passport": "Passport",
+    "analyze": "Analyze Photo",
     "language": "Language"
   },
   "home": {
     "title": "Welcome to your Museum Passport",
     "subtitle": "Scan the QR at each museum to collect stamps and build your passport",
     "browseMuseums": "Browse Museums",
-    "viewPassport": "View My Passport"
+    "viewPassport": "View My Passport",
+    "analyzePhoto": "Analyze a photo with AI"
+  },
+  "analyze": {
+    "title": "Museum Photo Analysis",
+    "subtitle": "Take or upload a photo at a museum and let the AI tell you what you're looking at",
+    "takePhoto": "Take Photo",
+    "uploadPhoto": "Choose from Gallery",
+    "analyzing": "Analyzing...",
+    "analyze": "Analyze Photo",
+    "tryAgain": "Try Another Photo",
+    "result": "Analysis Result",
+    "noImage": "No photo selected",
+    "noImageHint": "Take a photo or choose one from your device to begin",
+    "error": "Something went wrong",
+    "errorHint": "Could not analyze the photo. Please try again."
   },
   "language": {
     "th": "ไทย",
