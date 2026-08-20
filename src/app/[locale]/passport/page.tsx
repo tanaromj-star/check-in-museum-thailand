@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { museums, museumCategories } from "@/data/museums";
+import { badges, evaluateBadges } from "@/data/badges";
 import { usePassport } from "@/hooks/use-passport";
 import { Link } from "@/i18n/navigation";
 
@@ -25,6 +26,13 @@ export default function PassportPage() {
 
     return { visitedMuseums: visited, unvisitedMuseums: unvisited };
   }, [visits]);
+
+  // Earned badges are derived from the visit set via the pure evaluateBadges function.
+  const earnedBadgeIds = useMemo(
+    () => new Set(evaluateBadges(Object.keys(visits))),
+    [visits],
+  );
+  const earnedCount = earnedBadgeIds.size;
 
   function onShare() {
     const text = t("shareText", { count: visitCount });
@@ -197,6 +205,50 @@ export default function PassportPage() {
                       </p>
                     </Link>
                   ))}
+                </div>
+              </>
+            )}
+
+            {/* Badges */}
+            {visitCount > 0 && (
+              <>
+                <h2 className="mt-8 text-sm font-semibold text-zinc-500 uppercase tracking-wide">
+                  {t("badges")} ({earnedCount}/{badges.length})
+                </h2>
+                <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {badges.map((badge) => {
+                    const earned = earnedBadgeIds.has(badge.id);
+                    return (
+                      <div
+                        key={badge.id}
+                        className={`flex flex-col rounded-xl border p-4 transition-all ${
+                          earned
+                            ? "border-amber-300 bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-zinc-900 dark:to-zinc-950"
+                            : "border-zinc-200 dark:border-zinc-800 opacity-50"
+                        }`}
+                      >
+                        <div className="flex items-center justify-center h-16 mb-3">
+                          <div
+                            className={`flex h-14 w-14 items-center justify-center rounded-full text-2xl ${
+                              earned
+                                ? "bg-amber-100 dark:bg-amber-900/30"
+                                : "bg-zinc-100 dark:bg-zinc-900 grayscale"
+                            }`}
+                          >
+                            {earned ? badge.icon : "🔒"}
+                          </div>
+                        </div>
+                        <h3 className="text-sm font-semibold leading-snug">
+                          {locale === "th" ? badge.name_thai : badge.name_english}
+                        </h3>
+                        <p className="mt-1 text-xs text-zinc-500">
+                          {locale === "th"
+                            ? badge.description_thai
+                            : badge.description_english}
+                        </p>
+                      </div>
+                    );
+                  })}
                 </div>
               </>
             )}

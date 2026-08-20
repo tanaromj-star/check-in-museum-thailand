@@ -5,9 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 import { museums, getMuseumById } from "@/data/museums";
 import { usePassport } from "@/hooks/use-passport";
+import { useOfflineQueue } from "@/hooks/use-offline-queue";
 import { Link } from "@/i18n/navigation";
 
-type ScanStatus = "idle" | "scanning" | "success" | "already" | "error" | "camera-error";
+type ScanStatus = "idle" | "scanning" | "success" | "already" | "queued" | "error" | "camera-error";
 
 interface ScanResult {
   museumId: string;
@@ -27,6 +28,7 @@ interface ScanResult {
 export function QRScanner() {
   const t = useTranslations("museumDetail");
   const { checkIn, hasVisited } = usePassport();
+  const { isOnline, enqueue } = useOfflineQueue();
 
   const scannerRef = useRef<Html5Qrcode | null>(null);
   const containerId = "qr-scanner-container";
@@ -111,6 +113,26 @@ export function QRScanner() {
       // GPS unavailable — proceed without flag (no penalty for no signal)
     }
 
+    if (!isOnline) {
+      // Offline: queue the check-in for later sync.
+      await enqueue({
+        museumId,
+        timestamp: new Date().toISOString(),
+        gpsLat: undefined,
+        gpsLng: undefined,
+        flagged,
+      });
+      setResult({
+        museumId,
+        museumName: museum.name_english,
+        alreadyCheckedIn: already,
+        flagged,
+      });
+      setStatus("queued");
+      stopScanning();
+      return true;
+    }
+
     if (!already) {
       checkIn(museumId);
     }
@@ -191,7 +213,7 @@ export function QRScanner() {
         </button>
       )}
 
-      {(status === "scanning" || status === "success" || status === "already") && (
+      {(status === "scanning" || status === "success" || status === "already" || status === "queued") && (
         <button
           onClick={stopScanning}
           className="inline-flex h-12 items-center justify-center rounded-full border border-solid border-zinc-300 dark:border-zinc-700 px-6 text-sm transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
@@ -211,14 +233,20 @@ export function QRScanner() {
         </div>
       )}
 
-      {/* Success / already checked in */}
-      {(status === "success" || status === "already") && result && matchedMuseum && (
+      {/* Success / already checked in / queued */}
+      {(status === "success" || status === "already" || status === "queued") && result && matchedMuseum && (
         <div className="mt-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-5">
           <div className="flex items-center gap-3">
-            <span className="text-3xl">{status === "success" ? "✅" : "🎫"}</span>
+            <span className="text-3xl">
+              {status === "success" ? "✅" : status === "already" ? "🎫" : "📲"}
+            </span>
             <div>
               <p className="font-semibold text-base">
-                {status === "success" ? t("scanSuccess") : t("scanAlready")}
+                {status === "success"
+                  ? t("scanSuccess")
+                  : status === "already"
+                    ? t("scanAlready")
+                    : t("offlineQueued")}
               </p>
               <p className="text-sm text-zinc-500">
                 {t("checkedInAt", { museum: result.museumName })}

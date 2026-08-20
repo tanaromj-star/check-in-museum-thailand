@@ -58,7 +58,11 @@
     "scanError": "Could not scan. Please try again",
     "cameraError": "Cannot access camera. Please grant camera permission",
     "farFromMuseum": "You're far from the museum, but check-in is still accepted",
-    "checkedInAt": "Checked in at {museum}"
+    "checkedInAt": "Checked in at {museum}",
+    "offlineQueued": "Check-in saved offline — will sync when online",
+    "syncing": "Syncing check-ins...",
+    "synced": "Check-ins synced successfully",
+    "pendingCheckins": "{count} check-ins pending sync"
   },
   "passport": {
     "title": "My Passport",
@@ -75,7 +79,10 @@
     "visitedOn": "Visited on {date}",
     "notVisited": "Not visited yet",
     "stamps": "Stamps",
-    "museums": "Museums"
+    "museums": "Museums",
+    "badges": "Badges",
+    "badgesEarned": "Badges Earned",
+    "badgeLocked": "Locked"
   },
   "analyze": {
     "title": "Museum Photo Analysis",

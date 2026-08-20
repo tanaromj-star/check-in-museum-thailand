@@ -1,5 +1,6 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { QRScanner } from "@/components/qr-scanner";
+import { OfflineSyncIndicator } from "@/components/offline-sync-indicator";
 
 export default async function ScanPage({
   params,
@@ -20,6 +21,10 @@ export default async function ScanPage({
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">
           {t("scannerHint")}
         </p>
+
+        <div className="mt-4">
+          <OfflineSyncIndicator />
+        </div>
 
         <div className="mt-6">
           <QRScanner />
