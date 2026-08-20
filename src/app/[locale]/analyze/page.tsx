@@ -4,15 +4,9 @@ import { useLocale, useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { getMuseumById, museumCategories } from "@/data/museums";
+import { analyzeMuseumPhoto, isAIConfigured, type AnalysisResult, type Confidence } from "@/lib/ai-client";
 
 type Status = "idle" | "analyzing" | "done" | "error";
-type Confidence = "high" | "medium" | "low" | "none";
-
-interface AnalysisResult {
-  analysis: string;
-  museumId: string | null;
-  confidence: Confidence;
-}
 
 export default function AnalyzePage() {
   const t = useTranslations("analyze");
@@ -54,21 +48,15 @@ export default function AnalyzePage() {
     setError(null);
     setResult(null);
 
+    if (!isAIConfigured()) {
+      setError(t("errorHint"));
+      setStatus("error");
+      return;
+    }
+
     try {
-      const res = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image: imageDataUrl, locale }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Request failed");
-      }
-      setResult({
-        analysis: data.analysis,
-        museumId: data.museumId,
-        confidence: data.confidence,
-      });
+      const data = await analyzeMuseumPhoto(imageDataUrl, locale);
+      setResult(data);
       setStatus("done");
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));

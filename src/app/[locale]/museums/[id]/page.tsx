@@ -1,8 +1,15 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { getMuseumById, museumCategories } from "@/data/museums";
+import { getMuseumById, museumCategories, museums } from "@/data/museums";
+import { routing } from "@/i18n/routing";
 import { Link } from "@/i18n/navigation";
 import { CheckInButton } from "@/components/check-in-button";
+
+export function generateStaticParams() {
+  return routing.locales.flatMap((locale) =>
+    museums.map((m) => ({ locale, id: m.id })),
+  );
+}
 
 export default async function MuseumDetailPage({
   params,
