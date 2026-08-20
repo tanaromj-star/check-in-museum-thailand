@@ -2,28 +2,37 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useRef, useState } from "react";
+import { Link } from "@/i18n/navigation";
+import { getMuseumById, museumCategories } from "@/data/museums";
 
 type Status = "idle" | "analyzing" | "done" | "error";
+type Confidence = "high" | "medium" | "low" | "none";
+
+interface AnalysisResult {
+  analysis: string;
+  museumId: string | null;
+  confidence: Confidence;
+}
 
 export default function AnalyzePage() {
   const t = useTranslations("analyze");
-  const locale = useLocale();
+  const locale = useLocale() as "th" | "en";
 
   const cameraInputRef = useRef<HTMLInputElement>(null);
   const galleryInputRef = useRef<HTMLInputElement>(null);
 
   const [imageDataUrl, setImageDataUrl] = useState<string | null>(null);
-  const [analysis, setAnalysis] = useState<string | null>(null);
+  const [result, setResult] = useState<AnalysisResult | null>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
 
   function handleFileSelected(file: File) {
     const reader = new FileReader();
     reader.onload = () => {
-      const result = reader.result;
-      if (typeof result === "string") {
-        setImageDataUrl(result);
-        setAnalysis(null);
+      const r = reader.result;
+      if (typeof r === "string") {
+        setImageDataUrl(r);
+        setResult(null);
         setStatus("idle");
         setError(null);
       }
@@ -43,7 +52,7 @@ export default function AnalyzePage() {
     if (!imageDataUrl) return;
     setStatus("analyzing");
     setError(null);
-    setAnalysis(null);
+    setResult(null);
 
     try {
       const res = await fetch("/api/analyze", {
@@ -55,7 +64,11 @@ export default function AnalyzePage() {
       if (!res.ok) {
         throw new Error(data.error || "Request failed");
       }
-      setAnalysis(data.analysis);
+      setResult({
+        analysis: data.analysis,
+        museumId: data.museumId,
+        confidence: data.confidence,
+      });
       setStatus("done");
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -65,12 +78,28 @@ export default function AnalyzePage() {
 
   function onReset() {
     setImageDataUrl(null);
-    setAnalysis(null);
+    setResult(null);
     setStatus("idle");
     setError(null);
     if (cameraInputRef.current) cameraInputRef.current.value = "";
     if (galleryInputRef.current) galleryInputRef.current.value = "";
   }
+
+  const matchedMuseum = result?.museumId ? getMuseumById(result.museumId) : null;
+
+  const confidenceColor: Record<Confidence, string> = {
+    high: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
+    medium: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400",
+    low: "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400",
+    none: "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400",
+  };
+
+  const confidenceLabel: Record<Confidence, string> = {
+    high: t("confidenceHigh"),
+    medium: t("confidenceMedium"),
+    low: t("confidenceLow"),
+    none: t("confidenceNone"),
+  };
 
   return (
     <main className="flex flex-1 flex-col items-center px-4 py-8">
@@ -104,6 +133,7 @@ export default function AnalyzePage() {
         {/* Image preview or placeholder */}
         <div className="mt-6">
           {imageDataUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={imageDataUrl}
               alt={t("title")}
@@ -165,7 +195,7 @@ export default function AnalyzePage() {
           )}
         </div>
 
-        {/* Analysis result */}
+        {/* Loading state */}
         {status === "analyzing" && (
           <div className="mt-6 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4">
             <div className="flex items-center gap-2 text-zinc-500">
@@ -175,17 +205,58 @@ export default function AnalyzePage() {
           </div>
         )}
 
-        {status === "done" && analysis && (
+        {/* Result: AI analysis text */}
+        {status === "done" && result?.analysis && (
           <div className="mt-6 rounded-xl border border-zinc-200 dark:border-zinc-800 p-5">
             <h2 className="font-semibold text-sm text-zinc-500 uppercase tracking-wide">
               {t("result")}
             </h2>
             <div className="mt-2 text-base leading-relaxed whitespace-pre-wrap">
-              {analysis}
+              {result.analysis}
             </div>
           </div>
         )}
 
+        {/* Result: matched museum card */}
+        {status === "done" && matchedMuseum && (
+          <div className="mt-4 rounded-xl border border-foreground/20 bg-zinc-50 dark:bg-zinc-900/50 p-5">
+            <div className="flex items-center justify-between">
+              <h2 className="font-semibold text-sm text-zinc-500 uppercase tracking-wide">
+                {t("matchedMuseum")}
+              </h2>
+              <span
+                className={`text-xs font-medium px-2.5 py-1 rounded-full ${confidenceColor[result?.confidence ?? "none"]}`}
+              >
+                {t("confidence")}: {confidenceLabel[result?.confidence ?? "none"]}
+              </span>
+            </div>
+            <h3 className="mt-2 text-lg font-semibold">
+              {locale === "th" ? matchedMuseum.name_thai : matchedMuseum.name_english}
+            </h3>
+            <p className="mt-0.5 text-sm text-zinc-500">
+              {locale === "th"
+                ? matchedMuseum.province_thai
+                : matchedMuseum.province_english}
+              {" · "}
+              {museumCategories[matchedMuseum.category][locale]}
+            </p>
+            <Link
+              href={`/museums/${matchedMuseum.id}`}
+              className="mt-3 inline-flex h-10 items-center justify-center rounded-full bg-foreground px-5 text-sm text-background transition-colors hover:opacity-90"
+            >
+              {t("viewMuseum")}
+            </Link>
+          </div>
+        )}
+
+        {/* Result: no museum matched */}
+        {status === "done" && !matchedMuseum && result?.confidence === "none" && (
+          <div className="mt-4 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 text-center">
+            <p className="text-sm text-zinc-500">{t("noMatch")}</p>
+          </div>
+        )}
+
+        {/* Error state */}
         {status === "error" && (
           <div className="mt-6 rounded-xl border border-red-300 dark:border-red-800 bg-red-50 dark:bg-red-950/30 p-4">
             <p className="font-medium text-red-700 dark:text-red-400">{t("error")}</p>

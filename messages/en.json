@@ -51,7 +51,15 @@
     "noImage": "No photo selected",
     "noImageHint": "Take a photo or choose one from your device to begin",
     "error": "Something went wrong",
-    "errorHint": "Could not analyze the photo. Please try again."
+    "errorHint": "Could not analyze the photo. Please try again.",
+    "matchedMuseum": "Matched Museum",
+    "viewMuseum": "View Museum Details",
+    "confidence": "Confidence",
+    "confidenceHigh": "High",
+    "confidenceMedium": "Medium",
+    "confidenceLow": "Low",
+    "confidenceNone": "No matching museum found",
+    "noMatch": "No museum in our database matches this photo"
   },
   "language": {
     "th": "ไทย",
