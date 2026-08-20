@@ -41,7 +41,11 @@
     "checkIn": "Check in here",
     "checkedIn": "Checked in",
     "checkedInDate": "Checked in on {date}",
-    "removeCheckIn": "Remove check-in"
+    "removeCheckIn": "Remove check-in",
+    "qrCode": "QR Code",
+    "printQR": "Print QR Code",
+    "qrInstructions": "Display this QR code at the museum entrance for visitors to scan and check in",
+    "scanToCheckIn": "Scan to check in"
   },
   "passport": {
     "title": "My Passport",

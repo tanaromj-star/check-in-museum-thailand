@@ -24,3 +24,19 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Print styling for QR code pages */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .qr-card {
+    border: 2px solid #000 !important;
+    page-break-inside: avoid;
+  }
+
+  body {
+    background: #fff !important;
+  }
+}

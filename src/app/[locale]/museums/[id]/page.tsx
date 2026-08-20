@@ -97,7 +97,7 @@ export default async function MuseumDetailPage({
               </div>
             </div>
 
-            {/* Check-in + Map link */}
+            {/* Check-in + Map + QR links */}
             <div className="flex flex-wrap items-center gap-3">
               <CheckInButton museumId={museum.id} />
               <a
@@ -108,6 +108,12 @@ export default async function MuseumDetailPage({
               >
                 {t("openInMaps")}
               </a>
+              <Link
+                href={`/museums/${museum.id}/qr`}
+                className="inline-flex h-11 items-center justify-center rounded-full border border-solid border-zinc-300 dark:border-zinc-700 px-5 text-sm transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
+              >
+                🏷️ {t("qrCode")}
+              </Link>
             </div>
           </div>
         </div>

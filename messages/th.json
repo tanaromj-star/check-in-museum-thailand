@@ -41,7 +41,11 @@
     "checkIn": "เช็กอินที่นี่",
     "checkedIn": "เช็กอินแล้ว",
     "checkedInDate": "เช็กอินเมื่อ {date}",
-    "removeCheckIn": "ยกเลิกการเช็กอิน"
+    "removeCheckIn": "ยกเลิกการเช็กอิน",
+    "qrCode": "QR Code",
+    "printQR": "พิมพ์ QR Code",
+    "qrInstructions": "แสดง QR Code นี้ที่ทางเข้าพิพิธภัณฑ์เพื่อให้ผู้เยี่ยมชมสแกนเช็กอิน",
+    "scanToCheckIn": "สแกนเพื่อเช็กอิน"
   },
   "passport": {
     "title": "พาสปอร์ตของฉัน",
