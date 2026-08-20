@@ -8,6 +8,7 @@
     "museums": "พิพิธภัณฑ์",
     "passport": "พาสปอร์ต",
     "analyze": "วิเคราะห์รูป",
+    "scan": "สแกน",
     "language": "ภาษา"
   },
   "home": {
@@ -45,7 +46,19 @@
     "qrCode": "QR Code",
     "printQR": "พิมพ์ QR Code",
     "qrInstructions": "แสดง QR Code นี้ที่ทางเข้าพิพิธภัณฑ์เพื่อให้ผู้เยี่ยมชมสแกนเช็กอิน",
-    "scanToCheckIn": "สแกนเพื่อเช็กอิน"
+    "scanToCheckIn": "สแกนเพื่อเช็กอิน",
+    "scanQR": "สแกน QR",
+    "scannerTitle": "สแกน QR Code พิพิธภัณฑ์",
+    "scannerHint": "เล็งกล้องไปที่ QR Code ที่ประตูทางเข้าพิพิธภัณฑ์",
+    "scannerStart": "เริ่มสแกน",
+    "scannerStop": "หยุดสแกน",
+    "scanSuccess": "เช็กอินสำเร็จ!",
+    "scanAlready": "คุณเช็กอินที่นี่แล้ว",
+    "scanNotFound": "ไม่พบพิพิธภัณฑ์จาก QR Code นี้",
+    "scanError": "ไม่สามารถสแกนได้ กรุณาลองใหม่",
+    "cameraError": "ไม่สามารถเปิดกล้องได้ กรุณาอนุญาตการเข้าถึงกล้อง",
+    "farFromMuseum": "คุณอยู่ไกลจากพิพิธภัณฑ์ แต่ยังเช็กอินได้",
+    "checkedInAt": "เช็กอินที่ {museum}"
   },
   "passport": {
     "title": "พาสปอร์ตของฉัน",

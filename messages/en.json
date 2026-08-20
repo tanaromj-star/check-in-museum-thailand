@@ -8,6 +8,7 @@
     "museums": "Museums",
     "passport": "Passport",
     "analyze": "Analyze Photo",
+    "scan": "Scan",
     "language": "Language"
   },
   "home": {
@@ -45,7 +46,19 @@
     "qrCode": "QR Code",
     "printQR": "Print QR Code",
     "qrInstructions": "Display this QR code at the museum entrance for visitors to scan and check in",
-    "scanToCheckIn": "Scan to check in"
+    "scanToCheckIn": "Scan to check in",
+    "scanQR": "Scan QR",
+    "scannerTitle": "Scan Museum QR Code",
+    "scannerHint": "Point the camera at the QR code at the museum entrance",
+    "scannerStart": "Start Scanning",
+    "scannerStop": "Stop Scanning",
+    "scanSuccess": "Check-in successful!",
+    "scanAlready": "You've already checked in here",
+    "scanNotFound": "No museum found from this QR code",
+    "scanError": "Could not scan. Please try again",
+    "cameraError": "Cannot access camera. Please grant camera permission",
+    "farFromMuseum": "You're far from the museum, but check-in is still accepted",
+    "checkedInAt": "Checked in at {museum}"
   },
   "passport": {
     "title": "My Passport",

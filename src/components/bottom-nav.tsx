@@ -18,7 +18,8 @@ export function BottomNav() {
   const items = [
     { href: "/", label: t("home"), icon: "🏠", key: "home" },
     { href: "/museums", label: t("museums"), icon: "🏛️", key: "museums" },
-    { href: "/analyze", label: t("analyze"), icon: "📸", key: "analyze" },
+    { href: "/scan", label: t("scan"), icon: "📷", key: "scan" },
+    { href: "/analyze", label: t("analyze"), icon: "🤖", key: "analyze" },
     { href: "/passport", label: t("passport"), icon: "🎫", key: "passport" },
   ] as const;
 
