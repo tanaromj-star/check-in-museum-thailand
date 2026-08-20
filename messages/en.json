@@ -17,6 +17,28 @@
     "viewPassport": "View My Passport",
     "analyzePhoto": "Analyze a photo with AI"
   },
+  "museums": {
+    "title": "Museums in Thailand",
+    "subtitle": "Explore museums across Thailand",
+    "search": "Search museums...",
+    "searchPlaceholder": "Search museums...",
+    "allProvinces": "All Provinces",
+    "allCategories": "All Categories",
+    "noResults": "No museums match your search",
+    "museumCount": "{count} museums found",
+    "province": "Province",
+    "category": "Category",
+    "viewDetails": "View Details",
+    "back": "Back"
+  },
+  "museumDetail": {
+    "address": "Address",
+    "location": "Location",
+    "openInMaps": "Open in Google Maps",
+    "category": "Category",
+    "province": "Province",
+    "notFound": "Museum not found"
+  },
   "analyze": {
     "title": "Museum Photo Analysis",
     "subtitle": "Take or upload a photo at a museum and let the AI tell you what you're looking at",

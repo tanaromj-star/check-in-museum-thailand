@@ -17,6 +17,28 @@
     "viewPassport": "ดูพาสปอร์ตของฉัน",
     "analyzePhoto": "วิเคราะห์รูปภาพด้วย AI"
   },
+  "museums": {
+    "title": "พิพิธภัณฑ์ในประเทศไทย",
+    "subtitle": "สำรวจพิพิธภัณฑ์ทั่วประเทศไทย",
+    "search": "ค้นหาพิพิธภัณฑ์...",
+    "searchPlaceholder": "ค้นหาพิพิธภัณฑ์...",
+    "allProvinces": "ทุกจังหวัด",
+    "allCategories": "ทุกประเภท",
+    "noResults": "ไม่พบพิพิธภัณฑ์ที่ตรงกับการค้นหา",
+    "museumCount": "พบ {count} พิพิธภัณฑ์",
+    "province": "จังหวัด",
+    "category": "ประเภท",
+    "viewDetails": "ดูรายละเอียด",
+    "back": "ย้อนกลับ"
+  },
+  "museumDetail": {
+    "address": "ที่อยู่",
+    "location": "ตำแหน่ง",
+    "openInMaps": "เปิดใน Google Maps",
+    "category": "ประเภท",
+    "province": "จังหวัด",
+    "notFound": "ไม่พบพิพิธภัณฑ์"
+  },
   "analyze": {
     "title": "วิเคราะห์รูปภาพพิพิธภัณฑ์",
     "subtitle": "ถ่ายรูปหรืออัปโหลดรูปที่พิพิธภัณฑ์ แล้วให้ AI บอกคุณว่าเห็นอะไร",
