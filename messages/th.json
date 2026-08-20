@@ -37,7 +37,28 @@
     "openInMaps": "เปิดใน Google Maps",
     "category": "ประเภท",
     "province": "จังหวัด",
-    "notFound": "ไม่พบพิพิธภัณฑ์"
+    "notFound": "ไม่พบพิพิธภัณฑ์",
+    "checkIn": "เช็กอินที่นี่",
+    "checkedIn": "เช็กอินแล้ว",
+    "checkedInDate": "เช็กอินเมื่อ {date}",
+    "removeCheckIn": "ยกเลิกการเช็กอิน"
+  },
+  "passport": {
+    "title": "พาสปอร์ตของฉัน",
+    "subtitle": "สะสมแสตมป์จากพิพิธภัณฑ์ที่คุณเยี่ยมชม",
+    "stampsCollected": "แสตมป์ที่สะสม",
+    "progress": "เยี่ยมชมแล้ว {visited} จาก {total} พิพิธภัณฑ์",
+    "empty": "ยังไม่มีแสตมป์",
+    "emptyHint": "ไปเยี่ยมชมพิพิธภัณฑ์แล้วกดเช็กอินเพื่อสะสมแสตมป์",
+    "browseMuseums": "ดูพิพิธภัณฑ์",
+    "share": "แชร์พาสปอร์ต",
+    "shareText": "ฉันได้เยี่ยมชมพิพิธภัณฑ์ในไทยแล้ว {count} แห่ง! 🏛️",
+    "shareSuccess": "คัดลอกลิงก์แล้ว",
+    "shareFailed": "ไม่สามารถแชร์ได้",
+    "visitedOn": "เยี่ยมชมเมื่อ {date}",
+    "notVisited": "ยังไม่ได้เยี่ยมชม",
+    "stamps": "แสตมป์",
+    "museums": "พิพิธภัณฑ์"
   },
   "analyze": {
     "title": "วิเคราะห์รูปภาพพิพิธภัณฑ์",

@@ -37,7 +37,28 @@
     "openInMaps": "Open in Google Maps",
     "category": "Category",
     "province": "Province",
-    "notFound": "Museum not found"
+    "notFound": "Museum not found",
+    "checkIn": "Check in here",
+    "checkedIn": "Checked in",
+    "checkedInDate": "Checked in on {date}",
+    "removeCheckIn": "Remove check-in"
+  },
+  "passport": {
+    "title": "My Passport",
+    "subtitle": "Collect stamps from museums you visit",
+    "stampsCollected": "Stamps Collected",
+    "progress": "Visited {visited} of {total} museums",
+    "empty": "No stamps yet",
+    "emptyHint": "Visit museums and check in to collect stamps",
+    "browseMuseums": "Browse Museums",
+    "share": "Share Passport",
+    "shareText": "I've visited {count} museums in Thailand! 🏛️",
+    "shareSuccess": "Link copied",
+    "shareFailed": "Could not share",
+    "visitedOn": "Visited on {date}",
+    "notVisited": "Not visited yet",
+    "stamps": "Stamps",
+    "museums": "Museums"
   },
   "analyze": {
     "title": "Museum Photo Analysis",

@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { getMuseumById, museumCategories } from "@/data/museums";
 import { Link } from "@/i18n/navigation";
+import { CheckInButton } from "@/components/check-in-button";
 
 export default async function MuseumDetailPage({
   params,
@@ -89,15 +90,18 @@ export default async function MuseumDetailPage({
               </div>
             </div>
 
-            {/* Map link */}
-            <a
-              href={mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-11 items-center justify-center rounded-full bg-foreground px-5 text-sm text-background transition-colors hover:opacity-90"
-            >
-              {t("openInMaps")}
-            </a>
+            {/* Check-in + Map link */}
+            <div className="flex flex-wrap items-center gap-3">
+              <CheckInButton museumId={museum.id} />
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-11 items-center justify-center rounded-full border border-solid border-zinc-300 dark:border-zinc-700 px-5 text-sm transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
+              >
+                {t("openInMaps")}
+              </a>
+            </div>
           </div>
         </div>
       </div>
